@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.RedacketMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.Redacket" >
+    <id column="redpacket_id" property="redpacketId" jdbcType="INTEGER" />
+    <result column="redpacket_name" property="redpacketName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="normal_image" property="normalImage" jdbcType="VARCHAR" />
+    <result column="over_image" property="overImage" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="valid_days" property="validDays" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    redpacket_id, redpacket_name, amount, intro, normal_image, over_image, deleted, valid_days, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from redpacket
+    where redpacket_id = #{redpacketId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from redpacket
+    where redpacket_id = #{redpacketId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.Redacket" >
+    insert into redpacket (redpacket_id, redpacket_name, amount, 
+      intro, normal_image, over_image, 
+      deleted, valid_days, create_time
+      )
+    values (#{redpacketId,jdbcType=INTEGER}, #{redpacketName,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{intro,jdbcType=VARCHAR}, #{normalImage,jdbcType=VARCHAR}, #{overImage,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=INTEGER}, #{validDays,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.Redacket" >
+    insert into redpacket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="redpacketId != null" >
+        redpacket_id,
+      </if>
+      <if test="redpacketName != null" >
+        redpacket_name,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="normalImage != null" >
+        normal_image,
+      </if>
+      <if test="overImage != null" >
+        over_image,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="validDays != null" >
+        valid_days,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="redpacketId != null" >
+        #{redpacketId,jdbcType=INTEGER},
+      </if>
+      <if test="redpacketName != null" >
+        #{redpacketName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="normalImage != null" >
+        #{normalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="overImage != null" >
+        #{overImage,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="validDays != null" >
+        #{validDays,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.Redacket" >
+    update redpacket
+    <set >
+      <if test="redpacketName != null" >
+        redpacket_name = #{redpacketName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="normalImage != null" >
+        normal_image = #{normalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="overImage != null" >
+        over_image = #{overImage,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="validDays != null" >
+        valid_days = #{validDays,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where redpacket_id = #{redpacketId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.Redacket" >
+    update redpacket
+    set redpacket_name = #{redpacketName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      intro = #{intro,jdbcType=VARCHAR},
+      normal_image = #{normalImage,jdbcType=VARCHAR},
+      over_image = #{overImage,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER},
+      valid_days = #{validDays,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where redpacket_id = #{redpacketId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.VerificationCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.VerificationCode" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="vcode" property="vcode" jdbcType="VARCHAR" />
+    <result column="vtype" property="vtype" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="over_time" property="overTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, vcode, vtype, create_time, over_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from verification_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from verification_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.VerificationCode" >
+    insert into verification_code (id, mobile, vcode, 
+      vtype, create_time, over_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{vcode,jdbcType=VARCHAR}, 
+      #{vtype,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{overTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.VerificationCode" >
+    insert into verification_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="vcode != null" >
+        vcode,
+      </if>
+      <if test="vtype != null" >
+        vtype,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="overTime != null" >
+        over_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="vcode != null" >
+        #{vcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vtype != null" >
+        #{vtype,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        #{overTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.VerificationCode" >
+    update verification_code
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="vcode != null" >
+        vcode = #{vcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vtype != null" >
+        vtype = #{vtype,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        over_time = #{overTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.VerificationCode" >
+    update verification_code
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      vcode = #{vcode,jdbcType=VARCHAR},
+      vtype = #{vtype,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      over_time = #{overTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMobileAndTimes" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from verification_code
+    where mobile = #{mobile,jdbcType=VARCHAR} AND create_time BETWEEN DATE_ADD(NOW(),INTERVAL -60 SECOND) AND NOW() limit 0,1
+  </select>
+
+  <select id="checkVcode" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from verification_code
+    where mobile = #{mobile,jdbcType=VARCHAR}
+    AND  vcode = #{verificationcode,jdbcType=VARCHAR}
+    AND vtype = #{vtype,jdbcType=INTEGER}
+    <![CDATA[
+         AND TIMESTAMPDIFF(MINUTE,NOW(),over_time)<=5 AND   TIMESTAMPDIFF(MINUTE,NOW(),over_time) >=0
+    ]]>
+    ORDER BY over_time DESC LIMIT 0,1
+  </select>
+</mapper>

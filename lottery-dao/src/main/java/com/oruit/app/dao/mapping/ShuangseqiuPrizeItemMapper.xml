@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.ShuangseqiuPrizeItemMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.ShuangseqiuPrizeItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="open_id" property="openId" jdbcType="INTEGER" />
+    <result column="prize" property="prize" jdbcType="VARCHAR" />
+    <result column="prize_name" property="prizeName" jdbcType="VARCHAR" />
+    <result column="winning_require" property="winningRequire" jdbcType="VARCHAR" />
+    <result column="winning_num" property="winningNum" jdbcType="INTEGER" />
+    <result column="single_bonus" property="singleBonus" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, open_id, prize, prize_name, winning_require, winning_num, single_bonus, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shuangseqiu_prize_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shuangseqiu_prize_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.ShuangseqiuPrizeItem" >
+    insert into shuangseqiu_prize_item (id, open_id, prize, 
+      prize_name, winning_require, winning_num, 
+      single_bonus, create_time)
+    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=INTEGER}, #{prize,jdbcType=VARCHAR}, 
+      #{prizeName,jdbcType=VARCHAR}, #{winningRequire,jdbcType=VARCHAR}, #{winningNum,jdbcType=INTEGER}, 
+      #{singleBonus,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.ShuangseqiuPrizeItem" >
+    insert into shuangseqiu_prize_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="prize != null" >
+        prize,
+      </if>
+      <if test="prizeName != null" >
+        prize_name,
+      </if>
+      <if test="winningRequire != null" >
+        winning_require,
+      </if>
+      <if test="winningNum != null" >
+        winning_num,
+      </if>
+      <if test="singleBonus != null" >
+        single_bonus,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=INTEGER},
+      </if>
+      <if test="prize != null" >
+        #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeName != null" >
+        #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="winningRequire != null" >
+        #{winningRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="winningNum != null" >
+        #{winningNum,jdbcType=INTEGER},
+      </if>
+      <if test="singleBonus != null" >
+        #{singleBonus,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.ShuangseqiuPrizeItem" >
+    update shuangseqiu_prize_item
+    <set >
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=INTEGER},
+      </if>
+      <if test="prize != null" >
+        prize = #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeName != null" >
+        prize_name = #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="winningRequire != null" >
+        winning_require = #{winningRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="winningNum != null" >
+        winning_num = #{winningNum,jdbcType=INTEGER},
+      </if>
+      <if test="singleBonus != null" >
+        single_bonus = #{singleBonus,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.ShuangseqiuPrizeItem" >
+    update shuangseqiu_prize_item
+    set open_id = #{openId,jdbcType=INTEGER},
+      prize = #{prize,jdbcType=VARCHAR},
+      prize_name = #{prizeName,jdbcType=VARCHAR},
+      winning_require = #{winningRequire,jdbcType=VARCHAR},
+      winning_num = #{winningNum,jdbcType=INTEGER},
+      single_bonus = #{singleBonus,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--开奖详情结果-->
+  <select id="SSQDetailsResult" resultType="map" parameterType="java.lang.Integer">
+    SELECT
+      shuangseqiu_prize_item.prize_name AS prizename,
+      shuangseqiu_prize_item.winning_num AS bettingNumber,
+      shuangseqiu_prize_item.single_bonus AS bettingNumMoney
+    FROM
+      shuangseqiu_prize_item
+    WHERE
+      shuangseqiu_prize_item.open_id = #{openid}
+    ORDER BY single_bonus DESC
+  </select>
+</mapper>

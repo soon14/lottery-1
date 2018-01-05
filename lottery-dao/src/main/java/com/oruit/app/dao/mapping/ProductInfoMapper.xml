@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.ProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.ProductInfo" >
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_catalog_id" property="productCatalogId" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.oruit.app.dao.model.ProductInfo" extends="BaseResultMap" >
+    <result column="product_content" property="productContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_id, product_catalog_id, product_name, description, intro, price, quantity,
+    photo, state, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    product_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_info
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_info
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.ProductInfo" >
+    insert into product_info (product_id, product_catalog_id, product_name,
+    description, intro, price,
+    quantity, photo, state,
+    create_time, product_content)
+    values (#{productId,jdbcType=INTEGER}, #{productCatalogId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+    #{description,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+    #{quantity,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},
+    #{createTime,jdbcType=TIMESTAMP}, #{productContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.ProductInfo" >
+    insert into product_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productCatalogId != null" >
+        product_catalog_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="productContent != null" >
+        product_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productCatalogId != null" >
+        #{productCatalogId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContent != null" >
+        #{productContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.ProductInfo" >
+    update product_info
+    <set >
+      <if test="productCatalogId != null" >
+        product_catalog_id = #{productCatalogId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContent != null" >
+        product_content = #{productContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oruit.app.dao.model.ProductInfo" >
+    update product_info
+    set product_catalog_id = #{productCatalogId,jdbcType=INTEGER},
+    product_name = #{productName,jdbcType=VARCHAR},
+    description = #{description,jdbcType=VARCHAR},
+    intro = #{intro,jdbcType=VARCHAR},
+    price = #{price,jdbcType=DECIMAL},
+    quantity = #{quantity,jdbcType=INTEGER},
+    photo = #{photo,jdbcType=VARCHAR},
+    state = #{state,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    product_content = #{productContent,jdbcType=LONGVARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.ProductInfo" >
+    update product_info
+    set product_catalog_id = #{productCatalogId,jdbcType=INTEGER},
+    product_name = #{productName,jdbcType=VARCHAR},
+    description = #{description,jdbcType=VARCHAR},
+    intro = #{intro,jdbcType=VARCHAR},
+    price = #{price,jdbcType=DECIMAL},
+    quantity = #{quantity,jdbcType=INTEGER},
+    photo = #{photo,jdbcType=VARCHAR},
+    state = #{state,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+
+  <select id="GetRechargeProductList" resultType="map" parameterType="map">
+    SELECT
+      product_info.product_id AS productid,
+      product_info.product_name AS productname,
+      product_info.price AS productprice
+    FROM
+      product_info
+    WHERE
+      state = 1
+      AND product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </select>
+
+  <!--查询价格-->
+  <select id="queryPrice" resultType="map" parameterType="map" >
+    SELECT
+      product_info.price
+    FROM
+      product_info JOIN product_catalog ON product_info.product_catalog_id = product_catalog.product_catalog_id
+    where product_id = #{productId,jdbcType=INTEGER}
+          AND product_catalog.product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+          AND  state  = 1
+  </select>
+  <!--查询商品的信息-->
+  <select id="BookDetails" resultType="map" parameterType="map" >
+    SELECT
+      product_info.product_id AS productid,
+      product_info.product_name AS  productname,
+      product_info.description,
+      product_info.intro,
+      product_info.price,
+      product_info.photo,
+      product_info.product_content AS productcontent
+    FROM
+      product_info
+      INNER JOIN product_catalog ON product_info.product_catalog_id = product_catalog.product_catalog_id
+      AND product_info.state = 1
+      AND product_id = #{productId,jdbcType=INTEGER}
+      AND product_catalog.product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </select>
+  <!--查询商品的信息-->
+  <select id="BookOrderInfo" resultType="map" parameterType="map" >
+    SELECT
+    product_info.product_id AS productid,
+    product_info.product_name AS  productname,
+    product_info.price
+    FROM
+    product_info
+    INNER JOIN product_catalog ON product_info.product_catalog_id = product_catalog.product_catalog_id
+    AND product_info.state = 1
+    AND product_id = #{productId,jdbcType=INTEGER}
+    AND product_catalog.product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </select>
+</mapper>

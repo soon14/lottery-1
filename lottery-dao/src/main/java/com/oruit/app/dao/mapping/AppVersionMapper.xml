@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.AppVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.AppVersion" >
+    <id column="vid" property="vid" jdbcType="INTEGER" />
+    <result column="ver_code" property="verCode" jdbcType="VARCHAR" />
+    <result column="ver_name" property="verName" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="down_url" property="downUrl" jdbcType="VARCHAR" />
+    <result column="system_type" property="systemType" jdbcType="INTEGER" />
+    <result column="important" property="important" jdbcType="INTEGER" />
+    <result column="qr_code" property="qrCode" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vid, ver_code, ver_name, intro, down_url, system_type, important, qr_code, deleted, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_version
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_version
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.AppVersion" >
+    insert into app_version (vid, ver_code, ver_name, 
+      intro, down_url, system_type, 
+      important, qr_code, deleted, 
+      create_time)
+    values (#{vid,jdbcType=INTEGER}, #{verCode,jdbcType=VARCHAR}, #{verName,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{downUrl,jdbcType=VARCHAR}, #{systemType,jdbcType=INTEGER}, 
+      #{important,jdbcType=INTEGER}, #{qrCode,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.AppVersion" >
+    insert into app_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="verCode != null" >
+        ver_code,
+      </if>
+      <if test="verName != null" >
+        ver_name,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="downUrl != null" >
+        down_url,
+      </if>
+      <if test="systemType != null" >
+        system_type,
+      </if>
+      <if test="important != null" >
+        important,
+      </if>
+      <if test="qrCode != null" >
+        qr_code,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="verCode != null" >
+        #{verCode,jdbcType=VARCHAR},
+      </if>
+      <if test="verName != null" >
+        #{verName,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="downUrl != null" >
+        #{downUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemType != null" >
+        #{systemType,jdbcType=INTEGER},
+      </if>
+      <if test="important != null" >
+        #{important,jdbcType=INTEGER},
+      </if>
+      <if test="qrCode != null" >
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.AppVersion" >
+    update app_version
+    <set >
+      <if test="verCode != null" >
+        ver_code = #{verCode,jdbcType=VARCHAR},
+      </if>
+      <if test="verName != null" >
+        ver_name = #{verName,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="downUrl != null" >
+        down_url = #{downUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemType != null" >
+        system_type = #{systemType,jdbcType=INTEGER},
+      </if>
+      <if test="important != null" >
+        important = #{important,jdbcType=INTEGER},
+      </if>
+      <if test="qrCode != null" >
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.AppVersion" >
+    update app_version
+    set ver_code = #{verCode,jdbcType=VARCHAR},
+      ver_name = #{verName,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      down_url = #{downUrl,jdbcType=VARCHAR},
+      system_type = #{systemType,jdbcType=INTEGER},
+      important = #{important,jdbcType=INTEGER},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+
+  <!--查询版本号和类型-->
+  <select id="selectByCodeAndType" parameterType="map" resultType="map">
+    SELECT
+      app_version.ver_code AS code,
+      app_version.ver_name AS name,
+      app_version.intro,
+      app_version.down_url AS url,
+      app_version.important,
+      app_version.qr_code AS qrcode
+    FROM
+      app_version
+    WHERE app_version.system_type = #{systemtype,jdbcType=INTEGER}
+    AND ver_code > #{versioncode,jdbcType=VARCHAR}
+    ORDER BY ver_code DESC
+    LIMIT 1
+  </select>
+</mapper>

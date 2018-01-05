@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.UserPlayRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.UserPlayRecord" >
+    <id column="play_id" property="playId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="caipiao_id" property="caipiaoId" jdbcType="INTEGER" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="play_type" property="playType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="winning_money" property="winningMoney" jdbcType="DECIMAL" />
+    <result column="prize_name" property="prizeName" jdbcType="VARCHAR" />
+    <result column="danma" property="danma" jdbcType="VARCHAR" />
+    <result column="tuoma" property="tuoma" jdbcType="VARCHAR" />
+    <result column="hongqiu" property="hongqiu" jdbcType="VARCHAR" />
+    <result column="lanqiu" property="lanqiu" jdbcType="VARCHAR" />
+    <result column="play_method" property="playMethod" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="qishu" property="qishu" jdbcType="INTEGER" />
+    <result column="beishu" property="beishu" jdbcType="INTEGER" />
+    <result column="zhushu" property="zhushu" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="caipiao_order_sub_id" property="caipiaoOrderSubId" jdbcType="VARCHAR" />
+    <result column="caipiao_order_sub_code" property="caipiaoOrderSubCode" jdbcType="VARCHAR" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="plan_id" property="planId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="query_lottery" property="queryLottery" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    play_id, user_id, caipiao_id, issue_no, play_type, status, winning_money, prize_name,
+    danma, tuoma, hongqiu, lanqiu, play_method, number, qishu, beishu, zhushu, amount,
+    caipiao_order_sub_id, caipiao_order_sub_code, order_time, plan_id, create_time, query_lottery
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_play_record
+    where play_id = #{playId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_play_record
+    where play_id = #{playId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.UserPlayRecord" >
+    insert into user_play_record (play_id, user_id, caipiao_id,
+    issue_no, play_type, status,
+    winning_money, prize_name, danma,
+    tuoma, hongqiu, lanqiu,
+    play_method, number, qishu,
+    beishu, zhushu, amount,
+    caipiao_order_sub_id, caipiao_order_sub_code,
+    order_time, plan_id, create_time,
+    query_lottery)
+    values (#{playId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{caipiaoId,jdbcType=INTEGER},
+    #{issueNo,jdbcType=VARCHAR}, #{playType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+    #{winningMoney,jdbcType=DECIMAL}, #{prizeName,jdbcType=VARCHAR}, #{danma,jdbcType=VARCHAR},
+    #{tuoma,jdbcType=VARCHAR}, #{hongqiu,jdbcType=VARCHAR}, #{lanqiu,jdbcType=VARCHAR},
+    #{playMethod,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{qishu,jdbcType=INTEGER},
+    #{beishu,jdbcType=INTEGER}, #{zhushu,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL},
+    #{caipiaoOrderSubId,jdbcType=VARCHAR}, #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+    #{orderTime,jdbcType=TIMESTAMP}, #{planId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{queryLottery,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.UserPlayRecord" useGeneratedKeys="true" keyProperty="playId">
+    insert into user_play_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="playId != null" >
+        play_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="caipiaoId != null" >
+        caipiao_id,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="winningMoney != null" >
+        winning_money,
+      </if>
+      <if test="prizeName != null" >
+        prize_name,
+      </if>
+      <if test="danma != null" >
+        danma,
+      </if>
+      <if test="tuoma != null" >
+        tuoma,
+      </if>
+      <if test="hongqiu != null" >
+        hongqiu,
+      </if>
+      <if test="lanqiu != null" >
+        lanqiu,
+      </if>
+      <if test="playMethod != null" >
+        play_method,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="qishu != null" >
+        qishu,
+      </if>
+      <if test="beishu != null" >
+        beishu,
+      </if>
+      <if test="zhushu != null" >
+        zhushu,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id,
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="queryLottery != null" >
+        query_lottery,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="playId != null" >
+        #{playId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoId != null" >
+        #{caipiaoId,jdbcType=INTEGER},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="winningMoney != null" >
+        #{winningMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeName != null" >
+        #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="danma != null" >
+        #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="hongqiu != null" >
+        #{hongqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="lanqiu != null" >
+        #{lanqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="playMethod != null" >
+        #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="queryLottery != null" >
+        #{queryLottery,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.UserPlayRecord" >
+    update user_play_record
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoId != null" >
+        caipiao_id = #{caipiaoId,jdbcType=INTEGER},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="winningMoney != null" >
+        winning_money = #{winningMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeName != null" >
+        prize_name = #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="danma != null" >
+        danma = #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        tuoma = #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="hongqiu != null" >
+        hongqiu = #{hongqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="lanqiu != null" >
+        lanqiu = #{lanqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="playMethod != null" >
+        play_method = #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        qishu = #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        beishu = #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        zhushu = #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planId != null" >
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="queryLottery != null" >
+        query_lottery = #{queryLottery,jdbcType=INTEGER},
+      </if>
+    </set>
+    where play_id = #{playId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.UserPlayRecord" >
+    update user_play_record
+    set user_id = #{userId,jdbcType=VARCHAR},
+    caipiao_id = #{caipiaoId,jdbcType=INTEGER},
+    issue_no = #{issueNo,jdbcType=VARCHAR},
+    play_type = #{playType,jdbcType=INTEGER},
+    status = #{status,jdbcType=INTEGER},
+    winning_money = #{winningMoney,jdbcType=DECIMAL},
+    prize_name = #{prizeName,jdbcType=VARCHAR},
+    danma = #{danma,jdbcType=VARCHAR},
+    tuoma = #{tuoma,jdbcType=VARCHAR},
+    hongqiu = #{hongqiu,jdbcType=VARCHAR},
+    lanqiu = #{lanqiu,jdbcType=VARCHAR},
+    play_method = #{playMethod,jdbcType=VARCHAR},
+    number = #{number,jdbcType=VARCHAR},
+    qishu = #{qishu,jdbcType=INTEGER},
+    beishu = #{beishu,jdbcType=INTEGER},
+    zhushu = #{zhushu,jdbcType=INTEGER},
+    amount = #{amount,jdbcType=DECIMAL},
+    caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR},
+    caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+    order_time = #{orderTime,jdbcType=TIMESTAMP},
+    plan_id = #{planId,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    query_lottery = #{queryLottery,jdbcType=INTEGER}
+    where play_id = #{playId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询用户的投注记录-->
+  <select id="QueryUserPlayRecord" resultType="map" parameterType="map" >
+    SELECT
+    user_play_record.play_id AS playid,
+    user_play_record.`status` AS state,
+    user_play_record.create_time AS createtime,
+    user_play_record.amount AS money,
+    user_play_record.winning_money as winmoney,
+    caipiao.caipiao_name as ticketname,
+    user_play_record.hongqiu,
+    user_play_record.lanqiu,
+    user_play_record.number,
+    user_play_record.issue_no,
+    user_play_record.caipiao_id
+    FROM
+    user_play_record JOIN caipiao
+    ON caipiao.caipiao_id = user_play_record.caipiao_id
+    <if test="playid != 0" >
+      AND user_play_record.play_id <![CDATA[<]]> #{playid}
+    </if>
+    AND user_play_record.user_id = #{userid,jdbcType=VARCHAR}
+    AND  user_play_record.status = #{status,jdbcType=INTEGER}
+    ORDER BY user_play_record.play_id DESC
+    LIMIT 0,#{pageSize}
+  </select>
+  <!--查询用户的投注记录-->
+  <select id="QueryUserPlayRecordALL" resultType="map" parameterType="map" >
+    SELECT
+    user_play_record.play_id AS playid,
+    user_play_record.`status` AS state,
+    user_play_record.create_time AS createtime,
+    user_play_record.amount AS money,
+    user_play_record.winning_money as winmoney,
+    caipiao.caipiao_name as ticketname,
+    user_play_record.hongqiu,
+    user_play_record.lanqiu,
+    user_play_record.number,
+    user_play_record.issue_no,
+    user_play_record.caipiao_id
+    FROM
+    user_play_record JOIN caipiao
+    ON caipiao.caipiao_id = user_play_record.caipiao_id
+    <if test="playid != 0" >
+      AND user_play_record.play_id <![CDATA[<]]> #{playid}
+    </if>
+    AND user_play_record.user_id = #{userid,jdbcType=VARCHAR}
+    ORDER BY user_play_record.play_id DESC
+    LIMIT 0,#{pageSize}
+  </select>
+  <!--查询用户的投注记录详情-->
+  <select id="BettingRecordDetails" resultType="map" parameterType="map" >
+    SELECT
+      user_play_record.caipiao_id AS caipiaoid,
+      user_play_record.issue_no AS issueno,
+      user_play_record.play_type AS type,
+      user_play_record.winning_money AS winmoney,
+      user_play_record.`status` AS state,
+      user_play_record.lanqiu AS bluenumber,
+      user_play_record.hongqiu AS rednumber,
+      user_play_record.tuoma,
+      user_play_record.danma,
+      user_play_record.play_method AS playmethod,
+      user_play_record.number ,
+      user_play_record.beishu AS bettingmultiple,
+      user_play_record.zhushu AS bettingnumber,
+      user_play_record.amount AS money,
+      user_play_record.caipiao_order_sub_code AS ordernumber,
+      user_play_record.order_time AS ordertime,
+      caipiao.caipiao_name AS lotteryname,
+      caipiao.caipiao_icon AS caipiaoicon
+    FROM
+      caipiao JOIN user_play_record
+        ON caipiao.caipiao_id = user_play_record.caipiao_id
+
+           AND user_play_record.user_id = #{userid,jdbcType=VARCHAR}
+           AND user_play_record.play_id = #{playid,jdbcType=INTEGER}
+    LIMIT 1
+  </select>
+
+  <!--追号记录投注的期数-->
+  <select id="queryissue" resultType="java.lang.Integer" parameterType="map" >
+    SELECT
+      COUNT(1)
+    FROM
+      user_play_record
+    WHERE user_id = #{userid}
+          AND plan_id = #{planid}
+  </select>
+  <!--追号记录投注的期数每期的钱数-->
+  <select id="queryissuemoney" resultType="java.lang.String" parameterType="map" >
+    SELECT
+      user_play_record.amount AS money
+    FROM
+      user_play_record
+    WHERE user_id = #{userid}
+          AND plan_id = #{planid}
+    LIMIT 1
+  </select>
+
+  <!--查询中奖金额列表-->
+  <select id="WinmoneyList" resultType="map" parameterType="map" >
+    SELECT
+      caipiao.caipiao_name AS lotteryname,
+      user_play_record.winning_money AS winningmoney,
+      user_play_record.order_time AS buyingtime,
+      user_play_record.amount AS buyingmoney,
+      user_play_record.play_id AS playid
+    FROM
+      caipiao JOIN user_play_record
+        ON user_play_record.caipiao_id = caipiao.caipiao_id
+           AND user_play_record.play_id <![CDATA[>]]> #{playid}
+           AND user_play_record.`status`  = 4
+           AND user_play_record.user_id = #{userId}
+    LIMIT 0  , #{pageSize}
+  </select>
+
+  <!--查询中奖总金额-->
+  <select id="QueryWinmoney" resultType="map" parameterType="map" >
+    SELECT
+      winning_money AS winningmoney
+    FROM
+      user_play_record
+    WHERE plan_id = #{planid}
+          AND caipiao_id = #{caipiaoid}
+          AND user_play_record.`status` = 4
+  </select>
+  <!--查询用户的追号投注记录-->
+  <select id="QueryUserzhuihaotoushuRecord" resultType="map" parameterType="map" >
+    SELECT
+      user_play_record.winning_money AS winningmoney,
+      user_play_record.`status`,
+      user_play_record.caipiao_order_sub_code AS caipiaoordersubcode,
+      user_play_record.issue_no AS issueno
+    FROM
+      user_play_record
+    WHERE user_play_record.plan_id = #{planid}
+  </select>
+
+  <!--中奖金额H5-->
+  <select id="WinmoneyListH5" resultType="map">
+    SELECT
+      user_play_record.winning_money AS  winningmoney,
+      user_play_record.order_time AS  windate,
+      user_info.mobile
+    FROM
+      user_play_record JOIN user_info
+        ON user_info.user_id = user_play_record.user_id
+           AND user_play_record.`status` = 4
+    ORDER BY user_play_record.order_time DESC
+    LIMIT 0 , 7
+  </select>
+
+  <!--保存中奖明细-->
+  <select id="savewinmoney" resultType="map">
+    SELECT
+      status,
+      caipiao_order_sub_code,
+      winning_money
+    FROM
+      user_play_record
+    WHERE query_lottery = 0
+          AND `status` = 4
+    GROUP BY caipiao_order_sub_code
+  </select>
+
+  <!--更新调取第三方的接口-->
+  <update id="updateByQueryLottery" parameterType="com.oruit.app.dao.model.UserPlayRecord" >
+    UPDATE user_play_record
+    SET query_lottery = #{queryLottery,jdbcType=INTEGER}
+    where caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询应该退款的用户-->
+  <select id="QueryUsertuikuan" resultType="map" parameterType="map" >
+    SELECT
+      user_play_record.user_id AS userid,
+      user_play_record.play_id AS playid,
+      user_play_record.caipiao_order_sub_id AS caipiaoordersubid,
+      user_play_record.caipiao_id AS caipiaoid
+    FROM
+      user_play_record
+    where caipiao_id = #{caipiaoid} AND issue_no <![CDATA[<]]> #{issueno} AND `status` in(0,5)
+  </select>
+  <!--查询应该退款的用户个数-->
+  <select id="QueryUsertuikuanqishu" resultType="java.lang.Integer" parameterType="map" >
+    SELECT
+    COUNT(1)
+    FROM
+    user_play_record
+    where user_id = #{userid}
+    AND caipiao_order_sub_id = #{caipiaoordersubid}
+    and status in(2,3,4) AND issue_no <![CDATA[<]]> #{issueno}
+  </select>
+
+  <!--发送通知-->
+  <select id="sendWinNotice" resultType="map">
+    SELECT
+    user_info.mobile,
+    user_play_record.issue_no AS issueno,
+    caipiao.caipiao_name
+    FROM
+    user_statistics
+    INNER JOIN user_info ON user_statistics.user_id = user_info.user_id
+    JOIN user_play_record ON user_info.user_id = user_play_record.user_id
+    JOIN caipiao ON user_play_record.caipiao_id = caipiao.caipiao_id
+    AND user_play_record.issue_no = #{issueno}
+    AND user_statistics.betting_num = 1
+    AND user_play_record.`status` = 4
+    AND user_info.id_authorized = 0
+    AND user_info.mobile != ""
+  </select>
+
+  <!--定时器的推送-->
+  <select id="queryUserWInningInfoAll" resultType="map" parameterType="map">
+    SELECT
+      user_play_record.user_id AS  userid
+      FROM
+      user_play_record
+      where `status` = 4
+      and issue_no = #{issueno}
+      AND user_play_record.user_id = #{userid}
+  </select>
+  <select id="queryIswin" resultType="java.lang.Integer" parameterType="map">
+   SELECT
+    count(1)
+    FROM
+    user_play_record
+    where issue_no = #{issueno}
+    AND user_id = #{userid}
+    AND `status` = 4
+    limit 1
+  </select>
+</mapper>

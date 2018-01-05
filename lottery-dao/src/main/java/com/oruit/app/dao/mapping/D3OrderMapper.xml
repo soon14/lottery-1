@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.D3OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.D3Order" >
+    <id column="caipiao_order_sub_id" property="caipiaoOrderSubId" jdbcType="VARCHAR" />
+    <result column="caipiao_order_sub_code" property="caipiaoOrderSubCode" jdbcType="VARCHAR" />
+    <result column="caipiao_order_id" property="caipiaoOrderId" jdbcType="VARCHAR" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="play_type" property="playType" jdbcType="INTEGER" />
+    <result column="play_method" property="playMethod" jdbcType="VARCHAR" />
+    <result column="danma" property="danma" jdbcType="VARCHAR" />
+    <result column="tuoma" property="tuoma" jdbcType="VARCHAR" />
+    <result column="baiwei" property="baiwei" jdbcType="VARCHAR" />
+    <result column="shiwei" property="shiwei" jdbcType="VARCHAR" />
+    <result column="gewei" property="gewei" jdbcType="VARCHAR" />
+    <result column="hezhi" property="hezhi" jdbcType="VARCHAR" />
+    <result column="qishu" property="qishu" jdbcType="INTEGER" />
+    <result column="beishu" property="beishu" jdbcType="INTEGER" />
+    <result column="zhushu" property="zhushu" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="redpacket_amount" property="redpacketAmount" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    caipiao_order_sub_id, caipiao_order_sub_code, caipiao_order_id, issue_no, play_type, 
+    play_method, danma, tuoma, baiwei, shiwei, gewei, hezhi, qishu, beishu, zhushu, amount, 
+    redpacket_amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from d3_order
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from d3_order
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.D3Order" >
+    insert into d3_order (caipiao_order_sub_id, caipiao_order_sub_code, 
+      caipiao_order_id, issue_no, play_type, 
+      play_method, danma, tuoma, 
+      baiwei, shiwei, gewei, 
+      hezhi, qishu, beishu, 
+      zhushu, amount, redpacket_amount, 
+      create_time)
+    values (#{caipiaoOrderSubId,jdbcType=VARCHAR}, #{caipiaoOrderSubCode,jdbcType=VARCHAR}, 
+      #{caipiaoOrderId,jdbcType=VARCHAR}, #{issueNo,jdbcType=VARCHAR}, #{playType,jdbcType=INTEGER}, 
+      #{playMethod,jdbcType=VARCHAR}, #{danma,jdbcType=VARCHAR}, #{tuoma,jdbcType=VARCHAR}, 
+      #{baiwei,jdbcType=VARCHAR}, #{shiwei,jdbcType=VARCHAR}, #{gewei,jdbcType=VARCHAR}, 
+      #{hezhi,jdbcType=VARCHAR}, #{qishu,jdbcType=INTEGER}, #{beishu,jdbcType=INTEGER}, 
+      #{zhushu,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{redpacketAmount,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.D3Order" >
+    insert into d3_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id,
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code,
+      </if>
+      <if test="caipiaoOrderId != null" >
+        caipiao_order_id,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="playMethod != null" >
+        play_method,
+      </if>
+      <if test="danma != null" >
+        danma,
+      </if>
+      <if test="tuoma != null" >
+        tuoma,
+      </if>
+      <if test="baiwei != null" >
+        baiwei,
+      </if>
+      <if test="shiwei != null" >
+        shiwei,
+      </if>
+      <if test="gewei != null" >
+        gewei,
+      </if>
+      <if test="hezhi != null" >
+        hezhi,
+      </if>
+      <if test="qishu != null" >
+        qishu,
+      </if>
+      <if test="beishu != null" >
+        beishu,
+      </if>
+      <if test="zhushu != null" >
+        zhushu,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="redpacketAmount != null" >
+        redpacket_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caipiaoOrderSubId != null" >
+        #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderId != null" >
+        #{caipiaoOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="playMethod != null" >
+        #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="danma != null" >
+        #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="baiwei != null" >
+        #{baiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="shiwei != null" >
+        #{shiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="gewei != null" >
+        #{gewei,jdbcType=VARCHAR},
+      </if>
+      <if test="hezhi != null" >
+        #{hezhi,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="redpacketAmount != null" >
+        #{redpacketAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.D3Order" >
+    update d3_order
+    <set >
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderId != null" >
+        caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="playMethod != null" >
+        play_method = #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="danma != null" >
+        danma = #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        tuoma = #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="baiwei != null" >
+        baiwei = #{baiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="shiwei != null" >
+        shiwei = #{shiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="gewei != null" >
+        gewei = #{gewei,jdbcType=VARCHAR},
+      </if>
+      <if test="hezhi != null" >
+        hezhi = #{hezhi,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        qishu = #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        beishu = #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        zhushu = #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="redpacketAmount != null" >
+        redpacket_amount = #{redpacketAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.D3Order" >
+    update d3_order
+    set caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR},
+      issue_no = #{issueNo,jdbcType=VARCHAR},
+      play_type = #{playType,jdbcType=INTEGER},
+      play_method = #{playMethod,jdbcType=VARCHAR},
+      danma = #{danma,jdbcType=VARCHAR},
+      tuoma = #{tuoma,jdbcType=VARCHAR},
+      baiwei = #{baiwei,jdbcType=VARCHAR},
+      shiwei = #{shiwei,jdbcType=VARCHAR},
+      gewei = #{gewei,jdbcType=VARCHAR},
+      hezhi = #{hezhi,jdbcType=VARCHAR},
+      qishu = #{qishu,jdbcType=INTEGER},
+      beishu = #{beishu,jdbcType=INTEGER},
+      zhushu = #{zhushu,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      redpacket_amount = #{redpacketAmount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询3d的订单-->
+  <select id="queryDThreeOrders" resultType="map" parameterType="java.lang.String" >
+    select
+    shuangseqiu_order.caipiao_order_sub_id AS caipiaoOrderSubId,
+    shuangseqiu_order.caipiao_order_sub_code AS caipiaoOrderSubCode,
+    shuangseqiu_order.caipiao_order_id AS  caipiaoOrderId,
+    shuangseqiu_order.issue_no AS issueNo,
+    shuangseqiu_order.play_type AS playType,
+    shuangseqiu_order.danma,
+    shuangseqiu_order.tuoma,
+    shuangseqiu_order.hongqiu,
+    shuangseqiu_order.lanqiu,
+    shuangseqiu_order.qishu,
+    shuangseqiu_order.beishu,
+    shuangseqiu_order.zhushu,
+    shuangseqiu_order.amount,
+    shuangseqiu_order.redpacket_amount AS redpacketAmount,
+    shuangseqiu_order.create_time AS createTime
+    from shuangseqiu_order
+    where caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR}
+  </select>
+</mapper>

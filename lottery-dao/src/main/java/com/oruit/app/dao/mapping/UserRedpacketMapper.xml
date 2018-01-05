@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.UserRedpacketMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.UserRedpacket" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="redpacket_id" property="redpacketId" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="over_time" property="overTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, redpacket_id, state, begin_time, over_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_redpacket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_redpacket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.UserRedpacket" >
+    insert into user_redpacket (id, user_id, redpacket_id,
+                                state, begin_time, over_time,
+                                create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{redpacketId,jdbcType=INTEGER},
+            #{state,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{overTime,jdbcType=TIMESTAMP},
+            #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.UserRedpacket" useGeneratedKeys="true" keyProperty="id">
+    insert into user_redpacket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="redpacketId != null" >
+        redpacket_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="overTime != null" >
+        over_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="redpacketId != null" >
+        #{redpacketId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        #{overTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.UserRedpacket" >
+    update user_redpacket
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="redpacketId != null" >
+        redpacket_id = #{redpacketId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        over_time = #{overTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.UserRedpacket" >
+    update user_redpacket
+    set user_id = #{userId,jdbcType=VARCHAR},
+      redpacket_id = #{redpacketId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      over_time = #{overTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--正常的红包-->
+  <select id="queryUserRedpacketNormal" resultType="map" parameterType="map" >
+    SELECT
+    user_redpacket.id AS redpackageid ,
+    redpacket.redpacket_name AS redname,
+    redpacket.amount AS  money,
+    redpacket.intro,
+    redpacket.normal_image AS redphoto,
+    user_redpacket.state,
+    user_redpacket.begin_time AS begintime,
+    user_redpacket.over_time AS overtime
+    FROM
+    redpacket JOIN user_redpacket
+    ON redpacket.redpacket_id = user_redpacket.redpacket_id
+    AND user_redpacket.state = 0
+    AND redpacket.deleted = 0
+    <if test="redpackageid != 0" >
+      AND  redpacket.redpacket_id <![CDATA[<]]>#{redpackageid}
+    </if>
+    AND user_redpacket.over_time  <![CDATA[>=]]> #{date}
+    AND #{date} <![CDATA[>=]]> user_redpacket.begin_time
+    AND user_id = #{userid,jdbcType=VARCHAR}
+    ORDER BY redpacket.redpacket_id DESC
+    LIMIT 0,#{pageSize}
+  </select>
+
+  <!--已经过期的红包-->
+  <select id="queryUserRedpacketNoNormal" resultType="map" parameterType="map" >
+    SELECT
+    user_redpacket.id AS redpackageid ,
+    redpacket.redpacket_name AS redname,
+    redpacket.amount AS  money,
+    redpacket.intro,
+    redpacket.over_image AS redphoto,
+    user_redpacket.state,
+    user_redpacket.begin_time AS begintime,
+    user_redpacket.over_time AS overtime
+    FROM
+    redpacket JOIN user_redpacket
+    ON redpacket.redpacket_id = user_redpacket.redpacket_id
+    AND user_redpacket.state = 0
+    AND redpacket.deleted = 0
+    AND user_id = #{userid,jdbcType=VARCHAR}
+    <if test="redpackageid != 0" >
+      AND  redpacket.redpacket_id <![CDATA[<]]>#{redpackageid}
+    </if>
+    AND user_redpacket.over_time  <![CDATA[<]]> #{date}
+    OR #{date} <![CDATA[<]]> user_redpacket.begin_time
+    ORDER BY redpacket.redpacket_id DESC
+    LIMIT 0,#{pageSize}
+  </select>
+  <!--已经过期的红包数量-->
+  <select id="queryUserRedpacketNoNormalnum" resultType="java.lang.Integer" parameterType="map" >
+    SELECT
+    count(1)
+    FROM
+    redpacket JOIN user_redpacket
+    ON redpacket.redpacket_id = user_redpacket.redpacket_id
+    AND user_redpacket.state = 0
+    AND redpacket.deleted = 0
+    AND user_id = #{userid,jdbcType=VARCHAR}
+    AND user_redpacket.over_time  <![CDATA[<]]> #{date}
+    OR #{date} <![CDATA[<]]> user_redpacket.begin_time
+
+  </select>
+  <!--正常的红包数量-->
+  <select id="queryUserRedpacketNormalnum" resultType="java.lang.Integer" parameterType="map" >
+    SELECT
+    count(1)
+    FROM
+    redpacket JOIN user_redpacket
+    ON redpacket.redpacket_id = user_redpacket.redpacket_id
+    AND user_redpacket.state = 0
+    AND redpacket.deleted = 0
+    AND user_redpacket.over_time  <![CDATA[>=]]> #{date}
+    AND #{date} <![CDATA[>=]]> user_redpacket.begin_time
+    AND user_id = #{userid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="query" resultType="java.lang.String" parameterType="java.lang.String" >
+    SELECT
+    user_id
+    FROM
+    redpacket JOIN user_redpacket
+    ON redpacket.redpacket_id = user_redpacket.redpacket_id
+    AND redpacket.deleted = 0
+    AND user_id = #{userid,jdbcType=VARCHAR}
+    LIMIT 1
+  </select>
+
+  <!--查询用户选择的红包作为抵扣-->
+  <select id="QueryChoiceRedPackage" resultType="java.lang.String" parameterType="map" >
+    SELECT
+      redpacket.amount
+    FROM
+      redpacket JOIN user_redpacket
+        ON user_redpacket.redpacket_id = redpacket.redpacket_id
+           AND redpacket.deleted = 0
+           AND user_redpacket.state = 0
+           AND user_redpacket.over_time  <![CDATA[>=]]> #{date}
+           AND #{date} <![CDATA[>=]]> user_redpacket.begin_time
+           AND user_redpacket.id = #{redpackageid}
+           AND user_id = #{userid}
+    LIMIT 1
+  </select>
+
+  <!--查询用户红包-->
+  <select id="QueryuserRedPackage" resultType="java.lang.String" parameterType="map" >
+    SELECT
+    redpacket.amount
+    FROM
+    redpacket JOIN user_redpacket
+    ON user_redpacket.redpacket_id = redpacket.redpacket_id
+    AND redpacket.deleted = 0
+    AND user_redpacket.state = 1
+    AND user_redpacket.id = #{redpackageid}
+    AND user_id = #{userid}
+    LIMIT 1
+  </select>
+</mapper>

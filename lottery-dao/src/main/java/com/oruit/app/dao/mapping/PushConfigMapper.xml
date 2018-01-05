@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.PushConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.PushConfig" >
+    <id column="push_code" property="pushCode" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="push_name" property="pushName" jdbcType="VARCHAR" />
+    <result column="push_type" property="pushType" jdbcType="VARCHAR" />
+    <result column="push_enable" property="pushEnable" jdbcType="INTEGER" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+    <result column="push_items" property="pushItems" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    push_code, user_id, push_name, push_type, push_enable, parent_code, push_items, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from push_config
+    where push_code = #{pushCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from push_config
+    where push_code = #{pushCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.PushConfig" >
+    insert into push_config (push_code, user_id, push_name,
+    push_type, push_enable, parent_code,
+    push_items, create_time)
+    values (#{pushCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{pushName,jdbcType=VARCHAR},
+    #{pushType,jdbcType=VARCHAR}, #{pushEnable,jdbcType=INTEGER}, #{parentCode,jdbcType=VARCHAR},
+    #{pushItems,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.PushConfig" >
+    insert into push_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pushCode != null" >
+        push_code,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="pushName != null" >
+        push_name,
+      </if>
+      <if test="pushType != null" >
+        push_type,
+      </if>
+      <if test="pushEnable != null" >
+        push_enable,
+      </if>
+      <if test="parentCode != null" >
+        parent_code,
+      </if>
+      <if test="pushItems != null" >
+        push_items,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pushCode != null" >
+        #{pushCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="pushName != null" >
+        #{pushName,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="pushEnable != null" >
+        #{pushEnable,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pushItems != null" >
+        #{pushItems,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.PushConfig" >
+    update push_config
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="pushName != null" >
+        push_name = #{pushName,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        push_type = #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="pushEnable != null" >
+        push_enable = #{pushEnable,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pushItems != null" >
+        push_items = #{pushItems,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where push_code = #{pushCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.PushConfig" >
+    update push_config
+    set user_id = #{userId,jdbcType=VARCHAR},
+    push_name = #{pushName,jdbcType=VARCHAR},
+    push_type = #{pushType,jdbcType=VARCHAR},
+    push_enable = #{pushEnable,jdbcType=INTEGER},
+    parent_code = #{parentCode,jdbcType=VARCHAR},
+    push_items = #{pushItems,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where push_code = #{pushCode,jdbcType=VARCHAR}
+  </update>
+  <!--推送列表的展示-->
+  <select id="queryPushInfo" resultType="map" parameterType="java.lang.String">
+   SELECT
+    push_config.push_code AS pushcode,
+    push_config.user_id AS userid,
+    push_config.push_name AS pushname,
+    push_config.push_enable AS pushenable,
+    push_config.parent_code AS parentcode,
+    push_config.push_items AS pushitems
+    FROM
+    push_config WHERE push_config.user_id = #{userid,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateByPrimaryKeySelectivePushConfig" parameterType="com.oruit.app.dao.model.PushConfig" >
+    update push_config
+    <set >
+      <if test="pushName != null" >
+        push_name = #{pushName,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        push_type = #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="pushEnable != null" >
+        push_enable = #{pushEnable,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pushItems != null" >
+        push_items = #{pushItems,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where push_code = #{pushCode,jdbcType=VARCHAR}
+    AND user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

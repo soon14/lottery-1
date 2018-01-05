@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.PushMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.PushMessage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="push_code" property="pushCode" jdbcType="VARCHAR" />
+    <result column="to_user" property="toUser" jdbcType="VARCHAR" />
+    <result column="push_content" property="pushContent" jdbcType="VARCHAR" />
+    <result column="push_status" property="pushStatus" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="push_time" property="pushTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, push_code, to_user, push_content, push_status, remark, push_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from push_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from push_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.PushMessage" >
+    insert into push_message (id, push_code, to_user, 
+      push_content, push_status, remark, 
+      push_time)
+    values (#{id,jdbcType=BIGINT}, #{pushCode,jdbcType=VARCHAR}, #{toUser,jdbcType=VARCHAR}, 
+      #{pushContent,jdbcType=VARCHAR}, #{pushStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{pushTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.PushMessage" >
+    insert into push_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pushCode != null" >
+        push_code,
+      </if>
+      <if test="toUser != null" >
+        to_user,
+      </if>
+      <if test="pushContent != null" >
+        push_content,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="pushTime != null" >
+        push_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pushCode != null" >
+        #{pushCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toUser != null" >
+        #{toUser,jdbcType=VARCHAR},
+      </if>
+      <if test="pushContent != null" >
+        #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.PushMessage" >
+    update push_message
+    <set >
+      <if test="pushCode != null" >
+        push_code = #{pushCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toUser != null" >
+        to_user = #{toUser,jdbcType=VARCHAR},
+      </if>
+      <if test="pushContent != null" >
+        push_content = #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        push_time = #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.PushMessage" >
+    update push_message
+    set push_code = #{pushCode,jdbcType=VARCHAR},
+      to_user = #{toUser,jdbcType=VARCHAR},
+      push_content = #{pushContent,jdbcType=VARCHAR},
+      push_status = #{pushStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      push_time = #{pushTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.ProductCatalogMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.ProductCatalog" >
+    <id column="product_catalog_id" property="productCatalogId" jdbcType="INTEGER" />
+    <result column="product_catalog_name" property="productCatalogName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="display_order" property="displayOrder" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_catalog_id, product_catalog_name, parent_id, display_order, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from product_catalog
+    where product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_catalog
+    where product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.ProductCatalog" >
+    insert into product_catalog (product_catalog_id, product_catalog_name,
+                                 parent_id, display_order, create_time
+    )
+    values (#{productCatalogId,jdbcType=INTEGER}, #{productCatalogName,jdbcType=VARCHAR},
+            #{parentId,jdbcType=INTEGER}, #{displayOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.ProductCatalog" >
+    insert into product_catalog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productCatalogId != null" >
+        product_catalog_id,
+      </if>
+      <if test="productCatalogName != null" >
+        product_catalog_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="displayOrder != null" >
+        display_order,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productCatalogId != null" >
+        #{productCatalogId,jdbcType=INTEGER},
+      </if>
+      <if test="productCatalogName != null" >
+        #{productCatalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.ProductCatalog" >
+    update product_catalog
+    <set >
+      <if test="productCatalogName != null" >
+        product_catalog_name = #{productCatalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="displayOrder != null" >
+        display_order = #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.ProductCatalog" >
+    update product_catalog
+    set product_catalog_name = #{productCatalogName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where product_catalog_id = #{productCatalogId,jdbcType=INTEGER}
+  </update>
+</mapper>

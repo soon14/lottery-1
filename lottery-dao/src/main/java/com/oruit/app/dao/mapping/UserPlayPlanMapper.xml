@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.UserPlayPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.UserPlayPlan" >
+    <id column="plan_id" property="planId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="caipiao_id" property="caipiaoId" jdbcType="INTEGER" />
+    <result column="play_type" property="playType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="danma" property="danma" jdbcType="VARCHAR" />
+    <result column="tuoma" property="tuoma" jdbcType="VARCHAR" />
+    <result column="hongqiu" property="hongqiu" jdbcType="VARCHAR" />
+    <result column="lanqiu" property="lanqiu" jdbcType="VARCHAR" />
+    <result column="play_method" property="playMethod" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="qishu" property="qishu" jdbcType="INTEGER" />
+    <result column="beishu" property="beishu" jdbcType="INTEGER" />
+    <result column="zhushu" property="zhushu" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="caipiao_order_sub_id" property="caipiaoOrderSubId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    plan_id, user_id, caipiao_id, play_type, status, danma, tuoma, hongqiu, lanqiu, play_method,
+    number, qishu, beishu, zhushu, amount, caipiao_order_sub_id, create_time, update_time,
+    type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_play_plan
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_play_plan
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.UserPlayPlan" >
+    insert into user_play_plan (plan_id, user_id, caipiao_id,
+    play_type, status, danma,
+    tuoma, hongqiu, lanqiu,
+    play_method, number, qishu,
+    beishu, zhushu, amount,
+    caipiao_order_sub_id, create_time, update_time,
+    type)
+    values (#{planId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{caipiaoId,jdbcType=INTEGER},
+    #{playType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{danma,jdbcType=VARCHAR},
+    #{tuoma,jdbcType=VARCHAR}, #{hongqiu,jdbcType=VARCHAR}, #{lanqiu,jdbcType=VARCHAR},
+    #{playMethod,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{qishu,jdbcType=INTEGER},
+    #{beishu,jdbcType=INTEGER}, #{zhushu,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL},
+    #{caipiaoOrderSubId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.UserPlayPlan" useGeneratedKeys="true" keyProperty="planId">
+    insert into user_play_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="caipiaoId != null" >
+        caipiao_id,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="danma != null" >
+        danma,
+      </if>
+      <if test="tuoma != null" >
+        tuoma,
+      </if>
+      <if test="hongqiu != null" >
+        hongqiu,
+      </if>
+      <if test="lanqiu != null" >
+        lanqiu,
+      </if>
+      <if test="playMethod != null" >
+        play_method,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="qishu != null" >
+        qishu,
+      </if>
+      <if test="beishu != null" >
+        beishu,
+      </if>
+      <if test="zhushu != null" >
+        zhushu,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planId != null" >
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoId != null" >
+        #{caipiaoId,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="danma != null" >
+        #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="hongqiu != null" >
+        #{hongqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="lanqiu != null" >
+        #{lanqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="playMethod != null" >
+        #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.UserPlayPlan" >
+    update user_play_plan
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoId != null" >
+        caipiao_id = #{caipiaoId,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="danma != null" >
+        danma = #{danma,jdbcType=VARCHAR},
+      </if>
+      <if test="tuoma != null" >
+        tuoma = #{tuoma,jdbcType=VARCHAR},
+      </if>
+      <if test="hongqiu != null" >
+        hongqiu = #{hongqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="lanqiu != null" >
+        lanqiu = #{lanqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="playMethod != null" >
+        play_method = #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        qishu = #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        beishu = #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        zhushu = #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.UserPlayPlan" >
+    update user_play_plan
+    set user_id = #{userId,jdbcType=VARCHAR},
+      caipiao_id = #{caipiaoId,jdbcType=INTEGER},
+      play_type = #{playType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      danma = #{danma,jdbcType=VARCHAR},
+      tuoma = #{tuoma,jdbcType=VARCHAR},
+      hongqiu = #{hongqiu,jdbcType=VARCHAR},
+      lanqiu = #{lanqiu,jdbcType=VARCHAR},
+      play_method = #{playMethod,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      qishu = #{qishu,jdbcType=INTEGER},
+      beishu = #{beishu,jdbcType=INTEGER},
+      zhushu = #{zhushu,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER}
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </update>
+
+  <!--追号记录-->
+  <select id="QueryAppendRecord" resultType="map" parameterType="map" >
+    SELECT
+    user_play_plan.plan_id AS planid,
+    user_play_plan.user_id AS userid,
+    user_play_plan.`status`,
+    user_play_plan.qishu AS issuenonum,
+    caipiao.caipiao_name AS ticketname,
+    user_play_plan.amount
+    FROM
+    user_play_plan JOIN caipiao
+    ON caipiao.caipiao_id = user_play_plan.caipiao_id
+    <if test="planid != 0" >
+      AND user_play_plan.plan_id <![CDATA[<]]> #{planid}
+    </if>
+    AND user_play_plan.qishu <![CDATA[<>]]> 1
+    AND user_play_plan.user_id = #{userid,jdbcType=VARCHAR}
+    AND user_play_plan.`status` = #{type}
+    ORDER BY user_play_plan.plan_id DESC
+    LIMIT 0 , #{pageSize}
+  </select>
+
+  <!--追号记录详情-->
+  <select id="AppendRecordDetails" resultType="map" parameterType="map" >
+    SELECT
+      user_play_plan.plan_id AS planid,
+      caipiao.caipiao_name AS ticketname,
+      user_play_plan.play_type AS type,
+      user_play_plan.hongqiu,
+      user_play_plan.`status`,
+      user_play_plan.lanqiu,
+      user_play_plan.play_method AS playmethod,
+      user_play_plan.number,
+      user_play_plan.beishu AS bettingmultiple,
+      user_play_plan.qishu,
+      user_play_plan.zhushu AS bettingnumber,
+      user_play_plan.amount AS money,
+      user_play_plan.create_time AS ordertime,
+      user_play_plan.caipiao_order_sub_id AS caipiaoordersubid,
+      caipiao.caipiao_icon AS photo,
+      user_play_plan.caipiao_id AS caipiaoid
+    FROM
+      caipiao JOIN user_play_plan
+        ON user_play_plan.caipiao_id = caipiao.caipiao_id
+           AND user_play_plan.plan_id = #{planid}
+           AND user_play_plan.user_id = #{userid}
+  </select>
+</mapper>

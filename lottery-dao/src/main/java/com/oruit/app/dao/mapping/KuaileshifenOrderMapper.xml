@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.KuaileshifenOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.KuaileshifenOrder" >
+    <id column="caipiao_order_sub_id" property="caipiaoOrderSubId" jdbcType="VARCHAR" />
+    <result column="caipiao_order_sub_code" property="caipiaoOrderSubCode" jdbcType="VARCHAR" />
+    <result column="caipiao_order_id" property="caipiaoOrderId" jdbcType="VARCHAR" />
+    <result column="issue_no" property="issueNo" jdbcType="VARCHAR" />
+    <result column="play_type" property="playType" jdbcType="INTEGER" />
+    <result column="play_method" property="playMethod" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="qishu" property="qishu" jdbcType="INTEGER" />
+    <result column="beishu" property="beishu" jdbcType="INTEGER" />
+    <result column="zhushu" property="zhushu" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="redpacket_amount" property="redpacketAmount" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    caipiao_order_sub_id, caipiao_order_sub_code, caipiao_order_id, issue_no, play_type,
+    play_method, number, qishu, beishu, zhushu, amount, redpacket_amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from kuaileshifen_order
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from kuaileshifen_order
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.KuaileshifenOrder" >
+    insert into kuaileshifen_order (caipiao_order_sub_id, caipiao_order_sub_code,
+    caipiao_order_id, issue_no, play_type,
+    play_method, number, qishu,
+    beishu, zhushu, amount,
+    redpacket_amount, create_time)
+    values (#{caipiaoOrderSubId,jdbcType=VARCHAR}, #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+    #{caipiaoOrderId,jdbcType=VARCHAR}, #{issueNo,jdbcType=VARCHAR}, #{playType,jdbcType=INTEGER},
+    #{playMethod,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{qishu,jdbcType=INTEGER},
+    #{beishu,jdbcType=INTEGER}, #{zhushu,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL},
+    #{redpacketAmount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.KuaileshifenOrder"  useGeneratedKeys="true" keyProperty="caipiaoOrderSubId">
+    insert into kuaileshifen_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caipiaoOrderSubId != null" >
+        caipiao_order_sub_id,
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code,
+      </if>
+      <if test="caipiaoOrderId != null" >
+        caipiao_order_id,
+      </if>
+      <if test="issueNo != null" >
+        issue_no,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="playMethod != null" >
+        play_method,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="qishu != null" >
+        qishu,
+      </if>
+      <if test="beishu != null" >
+        beishu,
+      </if>
+      <if test="zhushu != null" >
+        zhushu,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="redpacketAmount != null" >
+        redpacket_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caipiaoOrderSubId != null" >
+        #{caipiaoOrderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderSubCode != null" >
+        #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderId != null" >
+        #{caipiaoOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="playMethod != null" >
+        #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="redpacketAmount != null" >
+        #{redpacketAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.KuaileshifenOrder" >
+    update kuaileshifen_order
+    <set >
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderId != null" >
+        caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="playMethod != null" >
+        play_method = #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        qishu = #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        beishu = #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        zhushu = #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="redpacketAmount != null" >
+        redpacket_amount = #{redpacketAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.KuaileshifenOrder" >
+    update kuaileshifen_order
+    set caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR},
+      issue_no = #{issueNo,jdbcType=VARCHAR},
+      play_type = #{playType,jdbcType=INTEGER},
+      play_method = #{playMethod,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      qishu = #{qishu,jdbcType=INTEGER},
+      beishu = #{beishu,jdbcType=INTEGER},
+      zhushu = #{zhushu,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      redpacket_amount = #{redpacketAmount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where caipiao_order_sub_id = #{caipiaoOrderSubId,jdbcType=VARCHAR}
+  </update>
+  <!--查询快乐十分的注数-->
+  <select id="queryKLSFZhushu" resultType="map" parameterType="java.lang.String" >
+    SELECT
+      kuaileshifen_order.zhushu
+    FROM
+      caipiao_order_info JOIN kuaileshifen_order
+        ON caipiao_order_info.caipiao_order_id = kuaileshifen_order.caipiao_order_id
+           AND kuaileshifen_order.caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR}
+  </select>
+  <!--查询快乐十分的订单-->
+  <select id="querKLSFOrder" resultType="map" parameterType="java.lang.String" >
+    SELECT
+      kuaileshifen_order.caipiao_order_sub_id AS caipiaoOrderSubId,
+      kuaileshifen_order.caipiao_order_sub_code AS  caipiaoOrderSubCode,
+      kuaileshifen_order.caipiao_order_id AS caipiaoOrderId,
+      kuaileshifen_order.issue_no AS  issueNo,
+      kuaileshifen_order.play_type AS  playType,
+      kuaileshifen_order.play_method AS  playMethod,
+      kuaileshifen_order.number,
+      kuaileshifen_order.qishu,
+      kuaileshifen_order.beishu,
+      kuaileshifen_order.zhushu,
+      kuaileshifen_order.amount,
+      kuaileshifen_order.redpacket_amount AS redpacketAmount,
+      kuaileshifen_order.create_time AS createTime
+    FROM
+    kuaileshifen_order
+    where caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR}
+  </select>
+  <!--更新期数-->
+  <update id="updateByPrimaryKeySelectiveIssueno" parameterType="com.oruit.app.dao.model.KuaileshifenOrder" >
+    update kuaileshifen_order
+    <set >
+      <if test="caipiaoOrderSubCode != null" >
+        caipiao_order_sub_code = #{caipiaoOrderSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="caipiaoOrderId != null" >
+        caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=INTEGER},
+      </if>
+      <if test="playMethod != null" >
+        play_method = #{playMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="qishu != null" >
+        qishu = #{qishu,jdbcType=INTEGER},
+      </if>
+      <if test="beishu != null" >
+        beishu = #{beishu,jdbcType=INTEGER},
+      </if>
+      <if test="zhushu != null" >
+        zhushu = #{zhushu,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="redpacketAmount != null" >
+        redpacket_amount = #{redpacketAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where caipiao_order_id = #{caipiaoOrderId,jdbcType=VARCHAR}
+  </update>
+
+
+  <!--hongbao-->
+  <select id="queryredpackageid" resultType="java.lang.Integer" parameterType="map" >
+   SELECT
+    caipiao_order_info.redpacket_id AS redpacketid
+    FROM
+    kuaileshifen_order INNER JOIN caipiao_order_info ON
+    kuaileshifen_order.caipiao_order_id = caipiao_order_info.caipiao_order_id
+    AND kuaileshifen_order.caipiao_order_sub_id = #{caipiaoordersubid}
+    AND caipiao_order_info.user_id =  #{userid}
+  </select>
+
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.UserForbiddenMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.UserForbidden" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="forbidden_type" property="forbiddenType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, forbidden_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_forbidden
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_forbidden
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.UserForbidden" >
+    insert into user_forbidden (id, user_id, forbidden_type, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{forbiddenType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.UserForbidden" >
+    insert into user_forbidden
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="forbiddenType != null" >
+        forbidden_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="forbiddenType != null" >
+        #{forbiddenType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.UserForbidden" >
+    update user_forbidden
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="forbiddenType != null" >
+        forbidden_type = #{forbiddenType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.UserForbidden" >
+    update user_forbidden
+    set user_id = #{userId,jdbcType=VARCHAR},
+      forbidden_type = #{forbiddenType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--用户是否被禁止登录-->
+  <select id="queryUserid" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+    user_id
+    from user_forbidden
+    WHERE user_id = #{user_id,jdbcType=VARCHAR} LIMIT 1
+  </select>
+  <!--查询用户是否可以购彩-->
+  <select id="QueryUserForbidden" resultType="java.lang.String" parameterType="java.lang.String" >
+    SELECT
+    user_info.user_id
+    FROM
+    user_forbidden JOIN user_info ON
+    user_forbidden.user_id = user_info.user_id
+    AND user_info.user_state = 1
+    AND user_forbidden.forbidden_type <![CDATA[<>]]> 1
+    AND user_info.user_id = #{userId}
+  </select>
+
+  <!--用户状态-->
+  <select id="QueryUserForbiddenState" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      forbidden_type
+    from user_forbidden
+    WHERE user_id = #{user_id,jdbcType=VARCHAR} LIMIT 1
+  </select>
+</mapper>

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oruit.app.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.oruit.app.dao.model.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_state" property="userState" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="user_ship_level" property="userShipLevel" jdbcType="INTEGER" />
+    <result column="user_ship_path" property="userShipPath" jdbcType="VARCHAR" />
+    <result column="cm_code" property="cmCode" jdbcType="VARCHAR" />
+    <result column="first_login_time" property="firstLoginTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="join_date" property="joinDate" jdbcType="TIMESTAMP" />
+    <result column="wechat_authorized" property="wechatAuthorized" jdbcType="INTEGER" />
+    <result column="wechat_nick_name" property="wechatNickName" jdbcType="VARCHAR" />
+    <result column="wechat_photo" property="wechatPhoto" jdbcType="VARCHAR" />
+    <result column="wechat_gender" property="wechatGender" jdbcType="VARCHAR" />
+    <result column="wechat_province" property="wechatProvince" jdbcType="VARCHAR" />
+    <result column="wechat_city" property="wechatCity" jdbcType="VARCHAR" />
+    <result column="wechat_real_name" property="wechatRealName" jdbcType="VARCHAR" />
+    <result column="wechat_account" property="wechatAccount" jdbcType="VARCHAR" />
+    <result column="alipay_authorized" property="alipayAuthorized" jdbcType="INTEGER" />
+    <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
+    <result column="alipay_nick_name" property="alipayNickName" jdbcType="VARCHAR" />
+    <result column="alipay_photo" property="alipayPhoto" jdbcType="VARCHAR" />
+    <result column="alipay_real_name" property="alipayRealName" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="id_authorized" property="idAuthorized" jdbcType="INTEGER" />
+    <result column="qr_code" property="qrCode" jdbcType="VARCHAR" />
+    <result column="share_qr_code" property="shareQrCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, mobile, password, user_state, parent_id, user_ship_level, user_ship_path,
+    cm_code, first_login_time, update_time, join_date, wechat_authorized, wechat_nick_name,
+    wechat_photo, wechat_gender, wechat_province, wechat_city, wechat_real_name, wechat_account,
+    alipay_authorized, alipay_account, alipay_nick_name, alipay_photo, alipay_real_name,
+    channel_id, real_name, id_card, id_authorized, qr_code, share_qr_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oruit.app.dao.model.UserInfo" >
+    insert into user_info (user_id, mobile, password,
+    user_state, parent_id, user_ship_level,
+    user_ship_path, cm_code, first_login_time,
+    update_time, join_date, wechat_authorized,
+    wechat_nick_name, wechat_photo, wechat_gender,
+    wechat_province, wechat_city, wechat_real_name,
+    wechat_account, alipay_authorized, alipay_account,
+    alipay_nick_name, alipay_photo, alipay_real_name,
+    channel_id, real_name, id_card,
+    id_authorized, qr_code, share_qr_code
+    )
+    values (#{userId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{userState,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{userShipLevel,jdbcType=INTEGER},
+    #{userShipPath,jdbcType=VARCHAR}, #{cmCode,jdbcType=VARCHAR}, #{firstLoginTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP}, #{joinDate,jdbcType=TIMESTAMP}, #{wechatAuthorized,jdbcType=INTEGER},
+    #{wechatNickName,jdbcType=VARCHAR}, #{wechatPhoto,jdbcType=VARCHAR}, #{wechatGender,jdbcType=VARCHAR},
+    #{wechatProvince,jdbcType=VARCHAR}, #{wechatCity,jdbcType=VARCHAR}, #{wechatRealName,jdbcType=VARCHAR},
+    #{wechatAccount,jdbcType=VARCHAR}, #{alipayAuthorized,jdbcType=INTEGER}, #{alipayAccount,jdbcType=VARCHAR},
+    #{alipayNickName,jdbcType=VARCHAR}, #{alipayPhoto,jdbcType=VARCHAR}, #{alipayRealName,jdbcType=VARCHAR},
+    #{channelId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR},
+    #{idAuthorized,jdbcType=INTEGER}, #{qrCode,jdbcType=VARCHAR}, #{shareQrCode,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oruit.app.dao.model.UserInfo" useGeneratedKeys="true" keyProperty="userId">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="userState != null" >
+        user_state,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="userShipLevel != null" >
+        user_ship_level,
+      </if>
+      <if test="userShipPath != null" >
+        user_ship_path,
+      </if>
+      <if test="cmCode != null" >
+        cm_code,
+      </if>
+      <if test="firstLoginTime != null" >
+        first_login_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="wechatAuthorized != null" >
+        wechat_authorized,
+      </if>
+      <if test="wechatNickName != null" >
+        wechat_nick_name,
+      </if>
+      <if test="wechatPhoto != null" >
+        wechat_photo,
+      </if>
+      <if test="wechatGender != null" >
+        wechat_gender,
+      </if>
+      <if test="wechatProvince != null" >
+        wechat_province,
+      </if>
+      <if test="wechatCity != null" >
+        wechat_city,
+      </if>
+      <if test="wechatRealName != null" >
+        wechat_real_name,
+      </if>
+      <if test="wechatAccount != null" >
+        wechat_account,
+      </if>
+      <if test="alipayAuthorized != null" >
+        alipay_authorized,
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account,
+      </if>
+      <if test="alipayNickName != null" >
+        alipay_nick_name,
+      </if>
+      <if test="alipayPhoto != null" >
+        alipay_photo,
+      </if>
+      <if test="alipayRealName != null" >
+        alipay_real_name,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="idAuthorized != null" >
+        id_authorized,
+      </if>
+      <if test="qrCode != null" >
+        qr_code,
+      </if>
+      <if test="shareQrCode != null" >
+        share_qr_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null" >
+        #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="userShipLevel != null" >
+        #{userShipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userShipPath != null" >
+        #{userShipPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cmCode != null" >
+        #{cmCode,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLoginTime != null" >
+        #{firstLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wechatAuthorized != null" >
+        #{wechatAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="wechatNickName != null" >
+        #{wechatNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatPhoto != null" >
+        #{wechatPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatGender != null" >
+        #{wechatGender,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatProvince != null" >
+        #{wechatProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCity != null" >
+        #{wechatCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatRealName != null" >
+        #{wechatRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatAccount != null" >
+        #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAuthorized != null" >
+        #{alipayAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="alipayAccount != null" >
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayNickName != null" >
+        #{alipayNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayPhoto != null" >
+        #{alipayPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayRealName != null" >
+        #{alipayRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idAuthorized != null" >
+        #{idAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="qrCode != null" >
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shareQrCode != null" >
+        #{shareQrCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oruit.app.dao.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null" >
+        user_state = #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="userShipLevel != null" >
+        user_ship_level = #{userShipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userShipPath != null" >
+        user_ship_path = #{userShipPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cmCode != null" >
+        cm_code = #{cmCode,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLoginTime != null" >
+        first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wechatAuthorized != null" >
+        wechat_authorized = #{wechatAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="wechatNickName != null" >
+        wechat_nick_name = #{wechatNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatPhoto != null" >
+        wechat_photo = #{wechatPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatGender != null" >
+        wechat_gender = #{wechatGender,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatProvince != null" >
+        wechat_province = #{wechatProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCity != null" >
+        wechat_city = #{wechatCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatRealName != null" >
+        wechat_real_name = #{wechatRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatAccount != null" >
+        wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAuthorized != null" >
+        alipay_authorized = #{alipayAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayNickName != null" >
+        alipay_nick_name = #{alipayNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayPhoto != null" >
+        alipay_photo = #{alipayPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayRealName != null" >
+        alipay_real_name = #{alipayRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idAuthorized != null" >
+        id_authorized = #{idAuthorized,jdbcType=INTEGER},
+      </if>
+      <if test="qrCode != null" >
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shareQrCode != null" >
+        share_qr_code = #{shareQrCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oruit.app.dao.model.UserInfo" >
+    update user_info
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_state = #{userState,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      user_ship_level = #{userShipLevel,jdbcType=INTEGER},
+      user_ship_path = #{userShipPath,jdbcType=VARCHAR},
+      cm_code = #{cmCode,jdbcType=VARCHAR},
+      first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      wechat_authorized = #{wechatAuthorized,jdbcType=INTEGER},
+      wechat_nick_name = #{wechatNickName,jdbcType=VARCHAR},
+      wechat_photo = #{wechatPhoto,jdbcType=VARCHAR},
+      wechat_gender = #{wechatGender,jdbcType=VARCHAR},
+      wechat_province = #{wechatProvince,jdbcType=VARCHAR},
+      wechat_city = #{wechatCity,jdbcType=VARCHAR},
+      wechat_real_name = #{wechatRealName,jdbcType=VARCHAR},
+      wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      alipay_authorized = #{alipayAuthorized,jdbcType=INTEGER},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      alipay_nick_name = #{alipayNickName,jdbcType=VARCHAR},
+      alipay_photo = #{alipayPhoto,jdbcType=VARCHAR},
+      alipay_real_name = #{alipayRealName,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      id_authorized = #{idAuthorized,jdbcType=INTEGER},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      share_qr_code = #{shareQrCode,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <!--查询手机号是否已经存在-->
+  <select id="CheckMobile" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      mobile
+    from user_info WHERE mobile = #{mobile,jdbcType=VARCHAR} LIMIT 1
+  </select>
+  <!--用户登录-->
+  <select id="UserLogin" resultType="map" parameterType="map" >
+    select
+      user_info.user_id AS userid ,
+      user_info.mobile,
+      user_info.user_state AS  userstate,
+      user_info.parent_id AS parentid,
+      user_info.user_ship_level AS usershiplevel,
+      user_info.user_ship_path AS usershippath,
+      user_info.cm_code,
+      user_info.wechat_authorized AS wechatauthorized,
+      user_info.wechat_nick_name AS wechatnickname,
+      user_info.wechat_photo AS wechatphoto,
+      user_info.wechat_gender AS wechatgender,
+      user_info.wechat_province AS wechatprovince,
+      user_info.wechat_city AS wechatcity,
+      user_info.wechat_real_name AS wechatrealname,
+      user_info.wechat_account AS wechataccount,
+      user_info.alipay_authorized AS alipayauthorized,
+      user_info.alipay_account AS alipayaccount,
+      user_info.alipay_nick_name AS alipaynickname,
+      user_info.alipay_photo AS alipayphoto,
+      user_info.alipay_real_name AS alipayrealname,
+      user_info.id_authorized AS idauthorized
+    from user_info
+    WHERE mobile = #{mobile,jdbcType=VARCHAR}
+          AND password = #{password,jdbcType=VARCHAR}
+          AND user_state = 1 LIMIT 1
+  </select>
+  <!--查询用户首次登录时间-->
+  <select id="queryFirst" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      first_login_time
+    from user_info WHERE user_id = #{userId,jdbcType=VARCHAR} LIMIT 1
+  </select>
+
+  <!--查询用户信息-->
+  <select id="QueryUserInfo" resultType="map" parameterType="java.lang.String" >
+    SELECT
+      user_info.user_id AS userid,
+      user_info.mobile,
+      user_info.user_state AS userstate,
+      user_info.parent_id AS parentid,
+      user_info.user_ship_level AS usershiplevel,
+      user_info.user_ship_path AS usershippath,
+      user_info.cm_code,
+      user_info.wechat_authorized AS wechatauthorized,
+      user_info.wechat_nick_name AS wechatnickname,
+      user_info.wechat_photo AS wechatphoto,
+      user_info.wechat_gender AS wechatgender,
+      user_info.wechat_province AS wechatprovince,
+      user_info.wechat_city AS wechatcity,
+      user_info.wechat_real_name AS wechatrealname,
+      user_info.wechat_account AS wechataccount,
+      user_info.alipay_authorized AS alipayauthorized,
+      user_info.alipay_account AS alipayaccount,
+      user_info.alipay_nick_name AS alipaynickname,
+      user_info.alipay_photo AS alipayphoto,
+      user_info.alipay_real_name AS alipayrealname,
+      user_info.id_authorized AS idauthorized,
+      user_info.real_name AS realname,
+      user_info.id_card as idcard,
+      user_statistics.winning_balabce_amount AS winningbalance,
+      user_statistics.balance_amount AS rechargebalance,
+      user_statistics.balance_points AS balancepoints,
+      user_statistics.total_points AS totalpoints
+    FROM user_info JOIN user_statistics
+        ON user_statistics.user_id = user_info.user_id
+    AND user_info.user_id = #{userId,jdbcType=VARCHAR}
+    AND user_state = 1 LIMIT 1
+  </select>
+
+  <!--查询用户的密码-->
+  <select id="CheckPassword" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      password
+    from user_info WHERE user_id = #{userId,jdbcType=VARCHAR} LIMIT 1
+  </select>
+
+  <!--七日英雄榜-->
+  <select id="HeroesList" resultType="map"  >
+    SELECT
+      user_statistics.winning_total_amount AS money,
+      user_info.wechat_nick_name as name,
+      user_info.wechat_photo as photo,
+      user_info.mobile
+    FROM
+      user_info JOIN
+      user_statistics ON
+                        user_info.user_id = user_statistics.user_id
+                        AND user_info.user_state  = 1
+      AND user_statistics.winning_total_amount  <![CDATA[>]]> 0
+    ORDER BY user_statistics.winning_total_amount DESC
+    LIMIT 10
+
+  </select>
+
+
+  <!--查询用户信息-->
+  <select id="QueryUserInfoMy" resultType="map" parameterType="java.lang.String" >
+    SELECT
+      user_info.user_id AS userid,
+      user_statistics.balance_amount AS rechargebalance,
+      user_statistics.winning_total_amount AS winningbalance,
+      user_info.mobile,
+      user_info.wechat_photo AS redphoto,
+      user_info.alipay_photo AS alipayphoto
+    FROM
+      user_info JOIN
+      user_statistics ON
+      user_statistics.user_id = user_info.user_id
+      AND user_info.user_state = 1
+    AND user_info.user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据手机号查询出userid-->
+  <select id="QueryMobileUserid" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      user_id
+    from user_info WHERE mobile = #{mobile,jdbcType=VARCHAR} LIMIT 1
+  </select>
+
+  <!--验证身份证-->
+  <select id="QueryIDCard" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+      id_card
+    from user_info WHERE id_card = #{idCard,jdbcType=VARCHAR} LIMIT 1
+  </select>
+  <select id="queryUserAll" resultType="map"  >
+    SELECT
+    user_info.user_id AS  userid
+    FROM
+    user_info
+    where user_state = 1
+  </select>
+</mapper>
